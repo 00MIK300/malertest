@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maler Arifi</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(31, 47, 70, 1);
+            transition: var(--transition);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 80px;
+            width: auto;
+            transition: var(--transition);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+        
+        nav a:hover {
+            background: rgba(212, 160, 73, 1);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem 0;
+            background: linear-gradient(rgba(31, 47, 70, 1), rgba(31, 47, 70, 1)), url('pics/startpic/startpic1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: background-image 1s ease-in-out;
+        }
+        
+        .hero-content {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .hero-text {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: rgba(31, 47, 70, 1);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            border: 2px solid rgba(212, 160, 73, 1);
+        }
+        
+        .btn:hover {
+            background: rgba(212, 160, 73, 1);
+            transform: translateY(-3px);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            text-align: center;
+            border-top: 4px solid rgba(31, 47, 70, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(212, 160, 73, 1);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: rgba(31, 47, 70, 1);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: rgba(212, 160, 73, 1);
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+        
+        .gallery-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-slide {
+            min-width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        .gallery-btn {
+            background: rgba(31, 47, 70, 1);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        
+        .gallery-btn:hover {
+            background: 212, 160, 73, 1;
+            transform: scale(1.1);
+        }
+        
+        .gallery-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        
+        .gallery-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(44, 62, 80, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .gallery-indicator.active {
+            background: var(--secondary);
+            transform: scale(1.2);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            height: 400px;
+            background: url('pics/malerarifi/about-image.jpg') center/cover;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover {
+            transform: scale(1.03);
+        }
+        
+        /* Kundenprojekte Section */
+        .projects {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+        
+        .projects-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .projects-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-slide {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            padding: 2rem;
+        }
+        
+        .project-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .project-image-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .project-info {
+            flex: 1;
+        }
+        
+        .project-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .project-info p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .projects-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        .projects-btn {
+            background: rgba(31, 47, 70, 1);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        
+        .projects-btn:hover {
+            background: rgba(212, 160, 73, 1);
+            transform: scale(1.1);
+        }
+        
+        .projects-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        
+        .projects-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(44, 62, 80, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .projects-indicator.active {
+            background: var(--secondary);
+            transform: scale(1.2);
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            padding: 2rem;
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover .stat-number {
+            color: var(--accent);
+        }
+        
+        .stat-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+        
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+        
+        .contact-detail:hover {
+            background: rgba(212, 160, 73, .1);
+            transform: translateX(5px);
+        }
+        
+        .contact-detail i {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            transition: var(--transition);
+        }
+        
+        .contact-detail:hover i {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px) rotate(10deg);
+        }
+        
+        .contact-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(212, 160, 73, .1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(232, 194, 122, .5);
+            transform: scale(1.02);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-slide {
+                height: 400px;
+            }
+            
+            .project-slide {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .project-image-circle {
+                width: 250px;
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-slide {
+                height: 300px;
+            }
+            
+            .logo img {
+                height: 80px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-slide {
+                height: 250px;
+            }
+            
+            .project-image-circle {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .logo img {
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header mit Navigation -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="pics/logo/logo.png" alt="Malergeschäft Arifi">
+                </div>
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Startseite</a></li>
+                        <li><a href="#services">Leistungen</a></li>
+                        <li><a href="#gallery">Galerie</a></li>
+                        <li><a href="#about">Über Uns</a></li>
+                        <li><a href="#projects">Kundenprojekte</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Ihr Meister für professionelle Malerarbeiten</h1>
+                    <p>Wir verleihen Ihren Räumen neuen Glanz mit hochwertigen Malerarbeiten, Tapezierarbeiten und Fassadengestaltung. Seit über 20 Jahren vertrauen unsere Kunden auf unsere Expertise.</p>
+                    <a href="#services" class="btn">Leistungen entdecken</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Unsere Leistungen</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3>Innenraumgestaltung</h3>
+                    <p>Professionelle Malerarbeiten für Wohnräume, Büros und Gewerbeimmobilien mit hochwertigen Farben und Materialien.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Fassadenarbeiten</h3>
+                    <p>Renovierung und Neugestaltung von Hausfassaden mit langlebigen und witterungsbeständigen Anstrichen.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <h3>Tapezierarbeiten</h3>
+                    <p>Fachgerechte Tapezierarbeiten mit einer großen Auswahl an hochwertigen Tapeten für jeden Geschmack.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Lackierarbeiten</h3>
+                    <p>Präzise Lackierarbeiten für Möbel, Türen und Fenster mit hochwertigen Lacken und modernen Techniken.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Renovierungen</h3>
+                    <p>Komplette Renovierungen von Wohnungen und Häusern - von der Vorbereitung bis zur Endreinigung.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>Gewerbeobjekte</h3>
+                    <p>Malerarbeiten für Gewerbeimmobilien, Büros und Geschäftsräume mit speziellen gewerblichen Farben.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Unsere Arbeiten</h2>
+            <div class="gallery-container">
+                <div class="gallery-slides">
+                    <!-- Hier können Sie die Bilder einfach austauschen -->
+                    <div class="gallery-slide" style="background-image: url('pics/galerie/projekt1.jpg')"></div>
+                    <div class="gallery-slide" style="background-image: url('pics/galerie/projekt2.jpg')"></div>
+                    <div class="gallery-slide" style="background-image: url('pics/galerie/projekt3.jpg')"></div>
+                    <div class="gallery-slide" style="background-image: url('pics/galerie/projekt4.jpg')"></div>
+                </div>
+            </div>
+            <div class="gallery-controls">
+                <button class="gallery-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="gallery-indicators">
+                <div class="gallery-indicator active" data-index="0"></div>
+                <div class="gallery-indicator" data-index="1"></div>
+                <div class="gallery-indicator" data-index="2"></div>
+                <div class="gallery-indicator" data-index="3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Über Malergeschäft Arifi</h2>
+                    <p>Seit über 20 Jahren sind wir Ihr zuverlässiger Partner für Malerarbeiten in der Region. Unser Team aus erfahrenen Handwerkern steht für Qualität, Präzision und termingerechte Ausführung.</p>
+                    <p>Wir legen Wert auf individuelle Beratung und arbeiten mit hochwertigen Materialien renommierter Hersteller. Ob Neubau, Renovierung oder Sanierung - wir realisieren Ihre Vorstellungen.</p>
+                    <p>Unsere Kunden schätzen unsere Zuverlässigkeit, Sauberkeit auf der Baustelle und faire Preise. Lassen Sie sich von unseren Referenzen überzeugen!</p>
+                    <a href="#contact" class="btn">Kontakt aufnehmen</a>
+                </div>
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kundenprojekte Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Kundenprojekte</h2>
+            <div class="projects-slider">
+                <div class="projects-slides">
+                    <div class="project-slide">
+                        <div class="project-image">
+                            <div class="project-image-circle" style="background-image: url('pics/kundenprojekte/projekt1.jpg')"></div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Wohnungsrenovierung in Döttingen</h3>
+                            <p>Komplette Renovierung einer Altbauwohnung mit neuen Tapeten, Malerarbeiten und Lackierungen. Der Kunde war begeistert von der termingerechten und sauberen Ausführung.</p>
+                            <p>"Malergeschäft Arifi hat unsere Wohnung renoviert und wir sind begeistert! Die Arbeiten wurden termingerecht und sauber ausgeführt. Absolute Empfehlung!"</p>
+                            <p><strong>Maria Schmidt</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-slide">
+                        <div class="project-image">
+                            <div class="project-image-circle" style="background-image: url('pics/kundenprojekte/projekt2.jpg')"></div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Fassadensanierung in Brugg AG</h3>
+                            <p>Sanierung und Neugestaltung einer historischen Fassade mit speziellen witterungsbeständigen Farben. Das Ergebnis spricht für sich.</p>
+                            <p>"Professionelle Beratung, hervorragende Ausführung und ein sehr freundliches Team. Unsere Fassade sieht aus wie neu!"</p>
+                            <p><strong>Thomas Weber</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-slide">
+                        <div class="project-image">
+                            <div class="project-image-circle" style="background-image: url('pics/kundenprojekte/projekt3.jpg')"></div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Bürogestaltung in Spreitenbach</h3>
+                            <p>Moderne Gestaltung von Büroräumen mit speziellen gewerblichen Farben und Tapeten. Das Ergebnis schafft eine produktive Arbeitsatmosphäre.</p>
+                            <p>"Die Tapezierarbeiten in unserem Büro wurden perfekt umgesetzt. Das Team war pünktlich, sauber und sehr kompetent. Gerne wieder!"</p>
+                            <p><strong>Sabine Hoffmann</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="projects-controls">
+                <button class="projects-btn projects-prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="projects-btn projects-next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="projects-indicators">
+                <div class="projects-indicator active" data-index="0"></div>
+                <div class="projects-indicator" data-index="1"></div>
+                <div class="projects-indicator" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="container">
+            <h2 class="section-title">Unsere Erfolge in Zahlen</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="stat1">0</div>
+                    <div class="stat-text">Abgeschlossene Projekte</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="stat2">0</div>
+                    <div class="stat-text">Zufriedene Kunden</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="stat3">0</div>
+                    <div class="stat-text">Jahre Erfahrung</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Kontaktieren Sie uns</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>So erreichen Sie uns</h3>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p>Gewerbestrasse 115</p>
+                                <p>5314 Kleindöttingen</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p>079 745 15 93</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p>info@malerarifi.ch</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <p>Mo-Fr: 8:00 - 18:00 Uhr</p>
+                                <p>Sa: 9:00 - 14:00 Uhr</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Folgen Sie uns</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/malerarifi" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/malerarifi" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/41797451593" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Nachricht</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Nachricht senden</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Malergeschäft Arifi</h3>
+                    <p>Ihr zuverlässiger Partner für Malerarbeiten, Tapezierarbeiten und Fassadengestaltung in der Region.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Leistungen</h3>
+                    <div class="footer-links">
+                        <a href="#services">Innenraumgestaltung</a>
+                        <a href="#services">Fassadenarbeiten</a>
+                        <a href="#services">Tapezierarbeiten</a>
+                        <a href="#services">Lackierarbeiten</a>
+                        <a href="#services">Renovierungen</a>
+                        <a href="#services">Gewerbeobjekte</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kontakt</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Gewerbestrasse 115 5314 Kleindöttingen</p>
+                    <p><i class="fas fa-phone"></i> 079 745 15 93</p>
+                    <p><i class="fas fa-envelope"></i> info@malerarifi.ch</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Malergeschäft Arifi. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // GSAP ScrollTrigger Plugin registrieren
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Mobile Menu Toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav ul');
+            
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('show');
+            });
+            
+            // Smooth Scrolling für Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Mobile Menu schließen
+                        nav.classList.remove('show');
+                    }
+                });
+            });
+            
+            // Hero Background Bilder-Wechsel
+            const heroImages = [
+                "pics/startpic/startpic1.jpg",
+                "pics/startpic/startpic2.jpg",
+                "pics/startpic/startpic3.jpg",
+                "pics/startpic/startpic4.jpg"
+            ];
+
+            const heroSection = document.querySelector('.hero');
+            let heroIndex = 0;
+            
+            // Funktion zum Wechseln des Hero-Hintergrundbildes
+            function updateHeroBackground() {
+                heroIndex = (heroIndex + 1) % heroImages.length;
+                heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${heroImages[heroIndex]}')`;
+            }
+            
+            // Starte den Intervall für den Hero-Hintergrund
+            setInterval(updateHeroBackground, 4000);
+            
+            // Galerie Slider
+            const gallerySlides = document.querySelector('.gallery-slides');
+            const galleryIndicators = document.querySelectorAll('.gallery-indicator');
+            const nextBtn = document.querySelector('.next-btn');
+            const prevBtn = document.querySelector('.prev-btn');
+            let currentSlide = 0;
+            let slideInterval;
+
+            // Function to change slide
+            function goToSlide(index) {
+                // Exit if same slide or invalid index
+                if (index === currentSlide || index < 0 || index >= galleryIndicators.length) return;
+                
+                // Update current slide
+                currentSlide = index;
+                
+                // Move slides container
+                gallerySlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update indicators
+                galleryIndicators.forEach((indicator, i) => {
+                    if (i === currentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+                
+                // Reset auto slide timer
+                resetSlideInterval();
+            }
+            
+            // Next slide function
+            function nextSlide() {
+                let nextIndex = (currentSlide + 1) % galleryIndicators.length;
+                goToSlide(nextIndex);
+            }
+            
+            // Previous slide function
+            function prevSlide() {
+                let prevIndex = (currentSlide - 1 + galleryIndicators.length) % galleryIndicators.length;
+                goToSlide(prevIndex);
+            }
+            
+            // Auto slide change
+            function startSlideInterval() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            function resetSlideInterval() {
+                clearInterval(slideInterval);
+                startSlideInterval();
+            }
+            
+            // Event listeners for controls
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Event listeners for indicators
+            galleryIndicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    let index = parseInt(this.getAttribute('data-index'));
+                    goToSlide(index);
+                });
+            });
+            
+            // Start auto slide
+            startSlideInterval();
+            
+            // Pause auto slide when hovering over gallery
+            const galleryContainer = document.querySelector('.gallery-container');
+            galleryContainer.addEventListener('mouseenter', function() {
+                clearInterval(slideInterval);
+            });
+            
+            galleryContainer.addEventListener('mouseleave', function() {
+                startSlideInterval();
+            });
+            
+            // Kundenprojekte Slider
+            const projectsSlides = document.querySelector('.projects-slides');
+            const projectsIndicators = document.querySelectorAll('.projects-indicator');
+            const projectsNextBtn = document.querySelector('.projects-next-btn');
+            const projectsPrevBtn = document.querySelector('.projects-prev-btn');
+            let currentProjectSlide = 0;
+            let projectSlideInterval;
+
+            // Function to change project slide
+            function goToProjectSlide(index) {
+                if (index === currentProjectSlide || index < 0 || index >= projectsIndicators.length) return;
+                
+                currentProjectSlide = index;
+                
+                projectsSlides.style.transform = `translateX(-${currentProjectSlide * 100}%)`;
+                
+                projectsIndicators.forEach((indicator, i) => {
+                    if (i === currentProjectSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+                
+                resetProjectSlideInterval();
+            }
+            
+            // Next project slide function
+            function nextProjectSlide() {
+                let nextIndex = (currentProjectSlide + 1) % projectsIndicators.length;
+                goToProjectSlide(nextIndex);
+            }
+            
+            // Previous project slide function
+            function prevProjectSlide() {
+                let prevIndex = (currentProjectSlide - 1 + projectsIndicators.length) % projectsIndicators.length;
+                goToProjectSlide(prevIndex);
+            }
+            
+            // Auto project slide change
+            function startProjectSlideInterval() {
+                projectSlideInterval = setInterval(nextProjectSlide, 6000);
+            }
+            
+            function resetProjectSlideInterval() {
+                clearInterval(projectSlideInterval);
+                startProjectSlideInterval();
+            }
+            
+            // Event listeners for project controls
+            projectsNextBtn.addEventListener('click', nextProjectSlide);
+            projectsPrevBtn.addEventListener('click', prevProjectSlide);
+            
+            // Event listeners for project indicators
+            projectsIndicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    let index = parseInt(this.getAttribute('data-index'));
+                    goToProjectSlide(index);
+                });
+            });
+            
+            // Start auto project slide
+            startProjectSlideInterval();
+            
+            // Pause auto slide when hovering over projects
+            const projectsSlider = document.querySelector('.projects-slider');
+            projectsSlider.addEventListener('mouseenter', function() {
+                clearInterval(projectSlideInterval);
+            });
+            
+            projectsSlider.addEventListener('mouseleave', function() {
+                startProjectSlideInterval();
+            });
+            
+            // Animierte Statistik-Zahlen
+            // Hier können Sie die Zahlen leicht anpassen
+            const stats = {
+                projects: 210,   // Abgeschlossene Projekte
+                customers: 210,  // Zufriedene Kunden
+                years: 22        // Jahre Erfahrung
+            };
+            
+            function animateValue(id, start, end, duration) {
+                let obj = document.getElementById(id);
+                let range = end - start;
+                let current = start;
+                let increment = end > start ? 1 : -1;
+                let stepTime = Math.abs(Math.floor(duration / range));
+                let timer = setInterval(function() {
+                    current += increment;
+                    obj.innerHTML = current;
+                    if (current == end) {
+                        clearInterval(timer);
+                    }
+                }, stepTime);
+            }
+            
+            // Statistik-Animation auslösen, wenn der Bereich sichtbar wird
+            const statsSection = document.querySelector('.stats');
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateValue("stat1", 0, stats.projects, 2000);
+                        animateValue("stat2", 0, stats.customers, 2000);
+                        animateValue("stat3", 0, stats.years, 2000);
+                        statsObserver.unobserve(statsSection);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statsObserver.observe(statsSection);
+            
+            // Formular Validierung
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Hier würde normalerweise die Formularverarbeitung stattfinden
+                // Für diese Demo zeigen wir einfach eine Erfolgsmeldung an
+                
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Nachricht wird gesendet...';
+                submitBtn.disabled = true;
+                
+                // Simuliere eine Server-Antwort nach 2 Sekunden
+                setTimeout(function() {
+                    submitBtn.textContent = 'Nachricht gesendet!';
+                    submitBtn.style.background = '#2ecc71';
+                    
+                    // Formular zurücksetzen
+                    contactForm.reset();
+                    
+                    // Nach 3 Sekunden den Button zurücksetzen
+                    setTimeout(function() {
+                        submitBtn.textContent = originalText;
+                        submitBtn.style.background = '';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
